@@ -1,6 +1,6 @@
 # Сайт взаимодействия с фотографиями Mesto
 ---
-Проект доступен по ссылке: https://egorkonorov.github.io/russian-travel/
+Проект доступен по ссылке: https://egorkonorov.github.io/mesto/
 ---
 **Данная проектная работа результат начала обучения по теме JavaScript**  
   
