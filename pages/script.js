@@ -7,12 +7,12 @@ let profileDiscription = document.querySelector('.profile__discription');
 
 
 function closeForm(){
-    popup.classList.add('popup__disabled');
+    popup.classList.add('popup_disabled');
     popupForm.classList.add('popup__form_disabled');
 }
 
 function openForm(){
-    popup.classList.remove('popup__disabled');
+    popup.classList.remove('popup_disabled');
     popupForm.classList.remove('popup__form_disabled');
 }
 
@@ -29,7 +29,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = `${popupName.value}`;
     profileDiscription.textContent = `${popupDiscription.value}`;
-    popup.classList.add('popup__disabled');
+    popup.classList.add('popup_disabled');
     popupForm.classList.add('popup__form_disabled');
 }
 
