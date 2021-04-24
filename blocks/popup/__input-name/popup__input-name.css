@@ -1,0 +1,17 @@
+.popup__input-name{
+    max-width: 358px;
+    margin: 30px 36px 0 36px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-family:"Inter-Regular", 'Arial', 'Helvetica', sans-serif;
+    font-weight: normal;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+@media screen and (max-width:550px){
+    .popup__input-name{ 
+        margin: 30px 22px 0 22px;
+    }
+}

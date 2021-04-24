@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body>
+    <div class="page">
+        <div class="popup popup__disabled">
+                <form class="popup__form popup__form_disabled">
+                    <button class="popup__close-button" type="button"></button>
+                    <h2 class="popup__heading">Редактировать профиль</h2>
+                    <input type="text" class="popup__input-name" placeholder="Жак-Ив Кусто">
+                    <input type="text" class="popup__input-discription"placeholder="Исследователь океана">
+                    <button type="submit" class="popup__submit-button">Сохранить</button>
+                </form>
+        </div>
+        <header class="header">
+            <img class="header__logo" src="./images/Vector.svg" alt="Логотип">
+            <div class="header__line"></div>
+        </header>
+        <main>
+        <div class="profile">
+            <div class="profile__main-information">
+                <img class ="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+                <div class="profile__profile-info">
+                    <div class="profile_1st-line">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button"></button>
+                    </div>
+                    <p class="profile__discription">Исследователь океана</p>
+                </div>
+            </div>
+            <button class="profile_add-button"></button>
+        </div>
+
+        <div class="elements">
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/karachaevsk.png" alt="Карачаевск">
+                <div class="elements__board">
+                    <p class="elements__name">Карачаевск</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/elbrus.png" alt="Эльбрус">
+                <div class="elements__board">
+                    <p class="elements__name">Эльбрус</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/dombay.png" alt="Домбай">
+                <div class="elements__board">
+                    <p class="elements__name">Домбай</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/Lapland.jpg" alt="Лапландия">
+                <div class="elements__board">
+                    <p class="elements__name">Лапландия</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/arizona.jpg" alt="Аризона">
+                <div class="elements__board">
+                    <p class="elements__name">США, штат Аризона, Долина Смерти</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+            <div class="elements__element">
+                <img class="elements__picture" src="./images/new-zeland.jpg" alt="Новая Зеландия">
+                <div class="elements__board">
+                    <p class="elements__name">Новая Зеландия</p>
+                    <button class="elements__like"></button>
+                </div>
+            </div>
+        </div>
+    </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+        </footer>
+    </div>
+    <script src="./pages/script.js"></script>
+</body>
+</html>
