@@ -1,0 +1,10 @@
+.popup__form-base{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    max-width: 430px;
+    max-height: 330px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 2;
+}

@@ -9,10 +9,12 @@
     font-family:"Inter", 'Arial', 'Helvetica', sans-serif;
     font-weight: normal;
     cursor: pointer;
+    border:none;
+    border-radius: 2px;
 }
 
 .popup__submit-button:hover{
-    opacity: .5;
+    opacity: .8;
 }
 
 @media screen and (max-width:550px){

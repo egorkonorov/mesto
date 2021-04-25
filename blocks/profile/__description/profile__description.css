@@ -1,4 +1,4 @@
-.profile__discription{
+.profile__description{
     font-size: 18px;
     line-height: 1.2;
     color: white;
@@ -11,13 +11,13 @@
 }
 
 @media screen and (max-width:700px){
-    .profile__discription{ 
+    .profile__description{ 
         font-size: 14px;
     }
 }
 
 @media screen and (max-width:550px){
-    .profile__discription{ 
+    .profile__description{ 
         margin:14px 0 0 0;
     }
 }
