@@ -9,15 +9,13 @@ let popupDiscription = document.querySelector('.popup__input_type_description');
 
 
 function closeForm(){
-    document.querySelector('.popup').style.display = "none";
-    document.querySelector('.popup__form').style.display = "none";
+    popup.classList.toggle('popup_disabled');
 }
 
 function openForm(){
-    popupName.setAttribute('placeholder', `${profileName.textContent}`);
-    popupDiscription.setAttribute('placeholder', `${profileDiscription.textContent}`);
-    document.querySelector('.popup').style.display = "flex";
-    document.querySelector('.popup__form').style.display = "flex";
+    popupName.value = `${profileName.textContent}`;
+    popupDiscription.value = `${profileDiscription.textContent}`;
+    popup.classList.toggle('popup_disabled');
 }
 
 
@@ -29,8 +27,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = `${popupName.value}`;
     profileDiscription.textContent = `${popupDiscription.value}`;
-    document.querySelector('.popup').style.display = "none";
-    document.querySelector('.popup__form').style.display = "none";
+    closeForm()
 }
 
 popupForm.addEventListener('submit', formSubmitHandler);

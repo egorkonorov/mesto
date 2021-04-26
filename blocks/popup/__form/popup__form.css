@@ -1,8 +1,7 @@
 .popup__form{
     margin:0;
     align-self: center;
-    position: relative;
-    display:none;
+    display:flex;
     flex-direction: column;
     border-radius: 10px;
     z-index: 2;
