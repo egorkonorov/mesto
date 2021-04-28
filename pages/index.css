@@ -28,7 +28,7 @@
 @import url(./../blocks/footer/__copyright/footer__copyright.css);
 
 @import url(./../blocks/popup/popup.css);
-@import url(./../blocks/popup/popup_disabled.css);
+@import url(./../blocks/popup/_disabled/popup_disabled.css);
 @import url(./../blocks/popup/__base/popup__base.css);
 @import url(./../blocks/popup/__form/popup__form.css);
 @import url(./../blocks/popup/__heading/popup__heading.css);
