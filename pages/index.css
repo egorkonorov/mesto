@@ -1,5 +1,7 @@
 @import url(./../vendors/normalize.css);
 
+@import url(./../blocks/vision/vision.css);
+
 @import url(./../vendors/fonts/fonts.css);
 
 @import url(./../blocks/header/header.css);
@@ -21,8 +23,11 @@
 @import url(./../blocks/elements/__board/elements__board.css);
 @import url(./../blocks/elements/__element/elements__element.css);
 @import url(./../blocks/elements/__like/elements__like.css);
+@import url(./../blocks/elements/__like/_active/elements__like_active.css);
 @import url(./../blocks/elements/__name/elements__name.css);
 @import url(./../blocks/elements/__picture/elements__picture.css);
+@import url(./../blocks/elements/__trash/elements__trash.css);
+@import url(./../blocks/elements/__base/elements__base.css);
 
 @import url(./../blocks/footer/footer.css);
 @import url(./../blocks/footer/__copyright/footer__copyright.css);
@@ -35,5 +40,21 @@
 @import url(./../blocks/popup/__input/popup__input.css);
 @import url(./../blocks/popup/__submit-button/popup__submit__button.css);
 @import url(./../blocks/popup/__close-button/popup__close-button.css);
+
+@import url(./../blocks/popup-place/popup-place.css);
+@import url(./../blocks/popup-place/_disabled/popup-place_disabled.css);
+@import url(./../blocks/popup-place/__base/popup-place__base.css);
+@import url(./../blocks/popup-place/__close-button/popup-place__close-button.css);
+@import url(./../blocks/popup-place/__form/popup-place__form.css);
+@import url(./../blocks/popup-place/__heading/popup-place__heading.css);
+@import url(./../blocks/popup-place/__input/popup-place__input.css);
+@import url(./../blocks/popup-place/__submit_button/popup-place__submit_button.css);
+
+@import url(./../blocks/popup-picture/popup-picture.css);
+@import url(./../blocks/popup-picture/_disabled/popup-picture_disabled.css);
+@import url(./../blocks/popup-picture/__image/popup-picture__image.css);
+@import url(./../blocks/popup-picture/__name/popup-picture__name.css);
+@import url(./../blocks/popup-picture/__base/popup-picture__base.css);
+@import url(./../blocks/popup-picture/__close-button/popup-picture__close-button.css);
 
 

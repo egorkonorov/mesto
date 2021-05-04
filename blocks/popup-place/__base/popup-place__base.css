@@ -1,0 +1,10 @@
+.popup-place__base{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    position: relative;
+    max-width: 430px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 2;
+}

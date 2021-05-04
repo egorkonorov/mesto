@@ -1,5 +1,4 @@
-.popup_disabled{
+.popup-picture_disabled{
     visibility: hidden;
-    opacity: 0;
     animation: none;
 }
