@@ -1,167 +1,5 @@
-const closeButton = document.querySelector('.popup__close-button');
-const popup = document.querySelector('.popup');
-const popupForm = document.querySelector('.popup__form');
-const editButton = document.querySelector('.profile__edit-button');
-const profileName = document.querySelector('.profile__name');
-const profileDiscription = document.querySelector('.profile__description');
-const popupName = document.querySelector('.popup__input_type_name');
-const popupDiscription = document.querySelector('.popup__input_type_description');
-
-const addButtonPlace = document.querySelector('.profile__add-button')
-const closeButtonPlace = document.querySelector('.popup-place__close-button')
-const popupPlace = document.querySelector('.popup-place')
-const popupPlacePicture = document.querySelector('.popup-place__input_type_picture')
-const popupPlaceName = document.querySelector('.popup-place__input_type_name')
-const popupPlaceForm = document.querySelector('.popup-place__form')
-
-const popupPictureImage = document.querySelector('.popup-picture__image')
-const popupPictureName = document.querySelector('.popup-picture__name')
-const popupPictureCloseButton = document.querySelector('.popup-picture__close-button')
-
-const popupPicture = document.querySelector('.popup-picture')
-
-const elementsPicture = document.querySelectorAll('.elements__picture');
-const elementsName = document.querySelectorAll('.elements__name');
-
-function closeForm(){
-    popup.classList.toggle('popup_disabled');
-    popup.style.animation = 'nonvision 0.3s linear'
-}
-
-function openForm(){
-    popupName.value = `${profileName.textContent}`;
-    popupDiscription.value = `${profileDiscription.textContent}`;
-    popup.style.animation = 'vision 0.3s linear'
-    popup.classList.toggle('popup_disabled');
-}
-function closeFormPlace(){
-    popupPlace.classList.toggle('popup-place_disabled');
-    popupPlace.style.animation = 'nonvision 0.3s linear'
-}
-function openFormPlace(){
-    popupPlace.classList.toggle('popup-place_disabled');
-    popupPlace.style.animation = 'vision 0.3s linear'
-}
-
-function closePopupPicture(){
-  popupPicture.classList.toggle('popup-picture_disabled')
-  popupPicture.style.animation = 'nonvision 0.3s linear'
-}
-
-function openPopupPicture(){
-  popupPicture.classList.toggle('popup-picture_disabled')
-  popupPicture.style.animation = 'vision 0.3s linear'
-}
-
-
-
-closeButton.addEventListener('click', closeForm);
-editButton.addEventListener('click', openForm);
-addButtonPlace.addEventListener('click',openFormPlace)
-closeButtonPlace.addEventListener('click', closeFormPlace)
-popupPictureCloseButton.addEventListener('click', closePopupPicture)
-
-//Открытие попапа с картинкой
-function popupPictureOpen(){
-elementsPicture.forEach(function(item){
-  item.addEventListener('click',function(){
-    popupPictureImage.src = item.src
-    const firstSibling = item.nextElementSibling
-    const secondSibling = firstSibling.nextElementSibling
-    const firstChild = secondSibling.firstElementChild
-    popupPictureName.textContent = firstChild.textContent
-    openPopupPicture()
-  })
-})
-}
-popupPictureOpen()
-
-
-
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-    profileName.textContent = `${popupName.value}`;
-    profileDiscription.textContent = `${popupDiscription.value}`;
-    closeForm()
-}
-
-
-// Проставление лайка фотографиям
-function like(){
-const likeButton = document.querySelectorAll('.elements__like')
-likeButton.forEach(function(like){
-  like.addEventListener('click', function(evt){
-    evt.target.classList.toggle('elements__like_active');
-  })
-})
-}
-like()
-
-
-
-
-//Удаление элемента со страницы
-function deleteElement(){
-const trashButton = document.querySelectorAll('.elements__trash')
-trashButton.forEach(function(item){
-  item.addEventListener('click', function(){
-    const listItem = item.closest('.elements__element')
-    listItem.remove()
-  })
-})
-}
-deleteElement()
-
-//Добавление элемента на страницу
-function addElement(){
-const newElement = document.createElement('div')
-newElement.classList.add('elements__element')
-
-const newPicture = document.createElement('img')
-newPicture.setAttribute('alt', 'Картинка профиля')
-newPicture.classList.add('elements__picture')
-newElement.prepend(newPicture)
-
-const newTrash = document.createElement('img')
-newTrash.classList.add('elements__trash')
-newTrash.setAttribute('src', './images/Trash-ico.svg')
-newTrash.setAttribute('alt', 'Корзина')
-newElement.append(newTrash)
-
-const newBoard = document.createElement('div')
-newBoard.classList.add('elements__board')
-newElement.append(newBoard)
-
-const newName = document.createElement('h2')
-newBoard.prepend(newName)
-newName.classList.add('elements__name')
-
-const newLike = document.createElement('button')
-newLike.classList.add('elements__like')
-newLike.setAttribute('type', 'button')
-newBoard.append(newLike)
-
-
-const elements = document.querySelector('.elements')
-elements.prepend(newElement)
-newName.textContent = `${popupPlaceName.value}`
-newPicture.setAttribute('src', `${popupPlacePicture.value}`)
-}
-
-
-
-function formPlaceSubmitHandler (evt) {
-  evt.preventDefault();
-  addElement()
-  closeFormPlace()
-  like()
-  popupPictureOpen()
-}
-
-popupForm.addEventListener('submit', formSubmitHandler);
-popupPlaceForm.addEventListener('submit', formPlaceSubmitHandler)
-
-const initialCards = [
+  //Добавление начальных 6-ти карточек на страницу
+  const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -187,16 +25,186 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
+  initialCards.forEach(function(item){
+    const elementTemplate = document.querySelector('#element-template').content
+    const newElement = elementTemplate.querySelector('.elements__element').cloneNode(true)
+    const newPicture = newElement.querySelector('.elements__picture')
+    const newName = newElement.querySelector('.elements__name')
+    const elements = document.querySelector('.elements')
+    newPicture.src = item.link
+    newName.textContent = item.name
+    elements.append(newElement)
+  })
 
-let i = 0;
+  //Добавление элемента на страницу
+  const place = document.querySelector('#place')
+  const popupPlacePicture = place.querySelector('.popup__input_type_picture')
+  const popupPlaceName = place.querySelector('.popup__input_type_name')
+    function addElement(){
+      const elementTemplate = document.querySelector('#element-template').content
+      const newElement = elementTemplate.querySelector('.elements__element').cloneNode(true)
+      const newPicture = newElement.querySelector('.elements__picture')
+      const newName = newElement.querySelector('.elements__name')
+      const elements = document.querySelector('.elements')
+      newPicture.src = popupPlacePicture.value
+      newName.textContent = popupPlaceName.value
+      elements.prepend(newElement)
+
+      //Открытие попапа просмотра фотографии у новой карточки
+      newPicture.addEventListener('click',function(){
+        popupPictureImage.src = newPicture.src
+        const firstSibling = newPicture.nextElementSibling
+        const secondSibling = firstSibling.nextElementSibling
+        const firstChild = secondSibling.firstElementChild
+        popupPictureName.textContent = firstChild.textContent
+        openPopupPicture()
+      })
+      // Проставление лайка у новой карточки
+        const newLikeButton = newElement.querySelector('.elements__like')
+        newLikeButton.addEventListener('click', function(evt){
+        evt.target.classList.toggle('elements__like_active');
+        })
+
+      //Удаление новой карточки
+        const newTrashButton = newElement.querySelector('.elements__trash')
+        newTrashButton.addEventListener('click', function(){
+        const listItem = newTrashButton.closest('.elements__element')
+        listItem.remove()
+        })
+  }
+  
+  function formPlaceSubmitHandler (evt) {
+    evt.preventDefault();
+    addElement()
+    closeFormPlace()
+  }
+  const popupPlaceForm = place.querySelector('.popup__form')
+  popupPlaceForm.addEventListener('submit', formPlaceSubmitHandler)
+
+const closeButton = document.querySelector('.popup__close-button');
+const popup = document.querySelector('.popup');
+const popupForm = document.querySelector('.popup__form');
+const editButton = document.querySelector('.profile__edit-button');
+const profileName = document.querySelector('.profile__name');
+const profileDiscription = document.querySelector('.profile__description');
+const popupName = document.querySelector('.popup__input_type_name');
+const popupDiscription = document.querySelector('.popup__input_type_description');
+
+
+
+
+
+const picture = document.querySelector('#picture')
+const popupPictureImage = picture.querySelector('.popup__image')
+const popupPictureName = picture.querySelector('.popup__name')
+const popupPictureCloseButton = picture.querySelector('.popup__close-button_picture')
+
+const popupPicture = picture.querySelector('.popup_picture')
+
+
+const elementsPicture = document.querySelectorAll('.elements__picture');
+const elementsName = document.querySelectorAll('.elements__name');
+
+function closeForm(){
+    popup.classList.toggle('popup_disabled');
+    popup.style.animation = 'nonvision 0.3s linear'
+}
+
+function openForm(){
+    popupName.value = `${profileName.textContent}`;
+    popupDiscription.value = `${profileDiscription.textContent}`;
+    popup.style.animation = 'vision 0.3s linear'
+    popup.classList.toggle('popup_disabled');
+}
+
+const popupPlace = place.querySelector('.popup')
+const addButtonPlace = document.querySelector('.profile__add-button')
+const closeButtonPlace = place.querySelector('.popup__close-button')
+function closeFormPlace(){
+    popupPlace.classList.toggle('popup_disabled');
+    popupPlace.style.animation = 'nonvision 0.3s linear'
+}
+function openFormPlace(){
+    popupPlace.classList.toggle('popup_disabled');
+    popupPlace.style.animation = 'vision 0.3s linear'
+}
+addButtonPlace.addEventListener('click', openFormPlace)
+closeButtonPlace.addEventListener('click', closeFormPlace)
+
+
+
+function closePopupPicture(){
+  popupPicture.classList.toggle('popup_disabled')
+  popupPicture.style.animation = 'nonvision 0.3s linear'
+}
+
+function openPopupPicture(){
+  popupPicture.classList.toggle('popup_disabled')
+  popupPicture.style.animation = 'vision 0.3s linear'
+}
+
+
+
+closeButton.addEventListener('click', closeForm);
+editButton.addEventListener('click', openForm);
+addButtonPlace.addEventListener('click', openFormPlace)
+popupPictureCloseButton.addEventListener('click', closePopupPicture)
+
+//Открытие попапа с картинкой
+function popupPictureOpen(){
 elementsPicture.forEach(function(item){
-    item.src = initialCards[i].link;
-    i+=1;
-});
+  item.addEventListener('click',function(){
+    popupPictureImage.src = item.src
+    const firstSibling = item.nextElementSibling
+    const secondSibling = firstSibling.nextElementSibling
+    const firstChild = secondSibling.firstElementChild
+    popupPictureName.textContent = firstChild.textContent
+    openPopupPicture()
+  })
+})
+}
+popupPictureOpen()
 
-let n = 0
-elementsName.forEach(function(item){
-    item.textContent = initialCards[n].name;
-    n+=1;
-});
+
+//Изменение имени пользователя
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    profileName.textContent = `${popupName.value}`;
+    profileDiscription.textContent = `${popupDiscription.value}`;
+    closeForm()
+}
+popupForm.addEventListener('submit', formSubmitHandler);
+
+// Проставление лайка фотографиям
+function like(){
+const likeButton = document.querySelectorAll('.elements__like')
+likeButton.forEach(function(like){
+  like.addEventListener('click', function(evt){
+    evt.target.classList.toggle('elements__like_active');
+  })
+})
+}
+like()
+
+//Удаление элемента со страницы
+function deleteElement(){
+const trashButton = document.querySelectorAll('.elements__trash')
+trashButton.forEach(function(item){
+  item.addEventListener('click', function(){
+    const listItem = item.closest('.elements__element')
+    listItem.remove()
+  })
+})
+}
+deleteElement()
+
+
+
+
+
+
+
+
+
+
 

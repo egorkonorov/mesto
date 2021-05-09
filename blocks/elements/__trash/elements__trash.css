@@ -1,8 +1,10 @@
 .elements__trash{
     position: absolute;
+    background:transparent url(./../../../images/Trash-ico.svg) no-repeat left;
+    border: none;
     width:18px;
     height:19px;
-    object-fit: cover;
+    object-fit:contain;
     top: 18px;
     right:15px;
     cursor: pointer;

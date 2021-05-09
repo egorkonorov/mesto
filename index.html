@@ -20,25 +20,28 @@
                     </form>
                 </div>
         </div>
-        <div class="popup-place popup-place_disabled">
-            <div class="popup-place__base">
-                <form class="popup-place__form" name="edit-photo">
-                    <button class="popup-place__close-button" type="button"></button>
-                    <h2 class="popup-place__heading">Новое место</h2>
-                    <input type="text" name="picture" class="popup-place__input popup-place__input_type_name" placeholder="Название">
-                    <input type="text" name="name" class="popup-place__input popup-place__input_type_picture" placeholder="Ссылка на картинку">
-                    <button type="submit" class="popup-place__submit-button">Сохранить</button>
-                </form>
-            </div>
-    </div>  
-    <div class="popup-picture popup-picture_disabled">
-        <div class="popup-picture__base">
-            <button class="popup-picture__close-button" type="button"></button>
-            <img class="popup-picture__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Открытая картинка">
-            <p class="popup-picture__name">Архыз</p>
+        <div id="place">
+            <div class="popup popup_disabled">
+                <div class="popup__base">
+                    <form class="popup__form" name="edit-photo">
+                        <button class="popup__close-button" type="button"></button>
+                        <h2 class="popup__heading">Новое место</h2>
+                        <input type="text" name="picture" class="popup__input popup__input_type_name" placeholder="Название">
+                        <input type="text" name="name" class="popup__input popup__input_type_picture" placeholder="Ссылка на картинку">
+                        <button type="submit" class="popup__submit-button">Сохранить</button>
+                    </form>
+                </div>
+            </div> 
+        </div> 
+        <div id="picture">
+            <div class="popup_picture popup_disabled">
+                <div class="popup__base_picture">
+                    <button class="popup__close-button_picture" type="button"></button>
+                    <img class="popup__image" src="#" alt="Открытая картинка">
+                    <p class="popup__name">#</p>
+                </div>
+            </div>      
         </div>
-    </div>      
-
         <header class="header">
             <img class="header__logo" src="./images/Vector.svg" alt="Логотип">
         </header>
@@ -58,60 +61,24 @@
         </section>
 
         <section class="elements">
-            <div class="elements__element">
-                 <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                 <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                 <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__element">
-                <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__element">
-                <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__element">
-                <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__element">
-                <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__element">
-                <img class="elements__picture" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Картинка профиля">
-                <img class="elements__trash" src="./images/Trash-ico.svg" alt="Корзина">
-                <div class="elements__board">
-                    <h2 class="elements__name">#</h2>
-                    <button class="elements__like" type="button"></button>
-                </div>
-            </div>
+            
         </section>
     </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
         </footer>
     </div>
+<template id="element-template">
+    <div class="elements__element">
+        <img class="elements__picture" src="#" alt="Картинка профиля">
+        <button class="elements__trash" type="button"></button>
+        <div class="elements__board">
+            <h2 class="elements__name">#</h2>
+            <button class="elements__like" type="button"></button>
+        </div>
+    </div>    
+</template>
+
     <script src="./src/script.js"></script>
 </body>
 </html>
