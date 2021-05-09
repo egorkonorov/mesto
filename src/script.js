@@ -97,7 +97,7 @@ const popupDiscription = document.querySelector('.popup__input_type_description'
 const picture = document.querySelector('#picture')
 const popupPictureImage = picture.querySelector('.popup__image')
 const popupPictureName = picture.querySelector('.popup__name')
-const popupPictureCloseButton = picture.querySelector('.popup__close-button_picture')
+const popupPictureCloseButton = picture.querySelector('.popup__close-button')
 
 const popupPicture = picture.querySelector('.popup_picture')
 
