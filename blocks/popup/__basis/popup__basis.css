@@ -1,6 +1,5 @@
-.popup__base_picture{
+.popup__basis{
     display:inline-block;
     align-self: center;
     position: relative;
 }
-
