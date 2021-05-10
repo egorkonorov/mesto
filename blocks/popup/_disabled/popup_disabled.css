@@ -1,5 +1,5 @@
 .popup_disabled{
     visibility: hidden;
     opacity: 0;
-    animation: none;
+    transition: 0.5s;
 }

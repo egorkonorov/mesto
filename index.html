@@ -9,39 +9,35 @@
 </head>
 <body>
     <div class="page">
-        <div class="popup popup_disabled">
+        <div class="popup popup_disabled" id="information">
                 <div class="popup__base">
                     <form class="popup__form" name="edit-information">
                         <button class="popup__close-button" type="button"></button>
                         <h2 class="popup__heading">Редактировать профиль</h2>
-                        <input type="text" name="user-name" class="popup__input popup__input_type_name" placeholder="">
-                        <input type="text" name="user-description" class="popup__input popup__input_type_description" placeholder="">
+                        <input type="text" name="user-name" class="popup__input popup__input_type_name" placeholder="Имя пользователя" required>
+                        <input type="text" name="user-description" class="popup__input popup__input_type_description" placeholder="Описание" required>
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </form>
                 </div>
         </div>
-        <div id="place">
-            <div class="popup popup_disabled">
+            <div class="popup popup_disabled" id="place">
                 <div class="popup__base">
                     <form class="popup__form" name="edit-photo">
                         <button class="popup__close-button" type="button"></button>
                         <h2 class="popup__heading">Новое место</h2>
-                        <input type="text" name="picture" class="popup__input popup__input_type_name" placeholder="Название">
-                        <input type="text" name="name" class="popup__input popup__input_type_picture" placeholder="Ссылка на картинку">
+                        <input type="text" name="picture" class="popup__input popup__input_type_name" placeholder="Название" required>
+                        <input type="text" name="name" class="popup__input popup__input_type_picture" placeholder="Ссылка на картинку" required>
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </form>
                 </div>
             </div> 
-        </div> 
-        <div id="picture">
-            <div class="popup popup_picture popup_disabled">
+            <div class="popup popup_picture popup_disabled" id="place">
                 <div class="popup__basis">
                     <button class="popup__close-button" type="button"></button>
                     <img class="popup__image" src="#" alt="Открытая картинка">
                     <p class="popup__name">#</p>
                 </div>
             </div>      
-        </div>
         <header class="header">
             <img class="header__logo" src="./images/Vector.svg" alt="Логотип">
         </header>
