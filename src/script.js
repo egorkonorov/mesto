@@ -15,6 +15,13 @@
   const popupPictureCloseButton = popupPicture.querySelector('.popup__close-button')
   const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-button')
   const addButton = document.querySelector('.profile__add-button')
+  const popupPictureImage = popupPicture.querySelector('.popup__image')
+  const popupPictureName = popupPicture.querySelector('.popup__name')
+  const popupInformationForm = popupInformation.querySelector('.popup__form')
+  const popupPlaceForm = popupPlace.querySelector('.popup__form')
+
+
+
   //Функция создания карточки
   function createCard (name, link){
     //Назначение параметров карточки (ссылки и имени)
@@ -22,7 +29,7 @@
     const newPicture = newCard.querySelector('.elements__picture')
     const newName = newCard.querySelector('.elements__name')
     newPicture.src = link
-    newPicture.alt = 'Карточка профиля'
+    newPicture.alt = name
     newName.textContent = name
     // Проставление лайка у новой карточки
     const newLikeButton = newCard.querySelector('.elements__like')
@@ -37,10 +44,9 @@
     })
     //Открытие попапа просмотра фотографии у новой карточки
     newPicture.addEventListener('click',function(){
-      const popupPictureImage = popupPicture.querySelector('.popup__image')
-      const popupPictureName = popupPicture.querySelector('.popup__name')
       popupPictureImage.src = newPicture.src
       popupPictureName.textContent = newName.textContent
+      popupPictureImage.alt = name
       openPopup(popupPicture)
     })
     return newCard
@@ -66,14 +72,13 @@
   }
 
     //Открытие и закрытие попапа изменения информации
-    popupInformationName.value = `${profileName.textContent}`;
-    popupInformationDiscription.value = `${profileDiscription.textContent}`;
-    
     popupInformationCloseButton.addEventListener('click', function(){
-      openPopup(popupInformation)
+      closePopup(popupInformation)
     });
     editButton.addEventListener('click', function(){
-      closePopup(popupInformation)
+      popupInformationName.value = `${profileName.textContent}`;
+      popupInformationDiscription.value = `${profileDiscription.textContent}`;
+      openPopup(popupInformation)
     });
 
     //Отправка формы попапа изменения информации
@@ -83,7 +88,7 @@
       profileDiscription.textContent = `${popupInformationDiscription.value}`;
       closePopup(popupInformation)
     }
-    popupInformation.addEventListener('submit', submitPopupInformation );
+    popupInformationForm.addEventListener('submit', submitPopupInformation );
 
 
   const initialCards = [
@@ -139,7 +144,6 @@
     evt.preventDefault();
     addCardBegin(popupPlaceName.value, popupPlacePicture.value)
     closePopup(popupPlace)
-    popupPlaceName.reset()
-    popupPlacePicture.reset()
+    popupPlaceForm.reset()
   }
-  popupPlace.addEventListener('submit', submitPopupPlace );
+  popupPlaceForm.addEventListener('submit', submitPopupPlace );
