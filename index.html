@@ -11,22 +11,26 @@
     <div class="page">
         <div class="popup popup_disabled" id="information">
                 <div class="popup__base">
-                    <form class="popup__form" name="edit-information">
+                    <form id="form-edit-information" class="popup__form" name="edit-information" novalidate>
                         <button class="popup__close-button" type="button"></button>
                         <h2 class="popup__heading">Редактировать профиль</h2>
-                        <input type="text" name="user-name" class="popup__input popup__input_type_name" placeholder="Имя пользователя" required>
-                        <input type="text" name="user-description" class="popup__input popup__input_type_description" placeholder="Описание" required>
+                        <input id="name-input" type="text" minlength="2" maxlength="40" name="user-name" class="popup__input popup__input_type_name" placeholder="Имя пользователя" required>
+                        <span class="popup__name-input-error">Вы пропустили это поле</span>
+                        <input id="description-input" type="text" minlength="2" maxlength="200" maxlength="200" name="user-description" class="popup__input  popup__input_type_description" placeholder="Описание" required>
+                        <span class="popup__description-input-error">Вы пропустили это поле</span>
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </form>
                 </div>
         </div>
             <div class="popup popup_disabled" id="place">
                 <div class="popup__base">
-                    <form class="popup__form" name="edit-photo">
+                    <form id="form-edit-place" class="popup__form" name="edit-photo" novalidate>
                         <button class="popup__close-button" type="button"></button>
                         <h2 class="popup__heading">Новое место</h2>
-                        <input type="text" name="picture" class="popup__input popup__input_type_name" placeholder="Название" required>
-                        <input type="text" name="name" class="popup__input popup__input_type_picture" placeholder="Ссылка на картинку" required>
+                        <input id="picture-input" type="text" minlength="2" maxlength="30" name="picture" class="popup__input popup__input_type_name" placeholder="Название" required>
+                        <span class="popup__picture-input-error">Вы пропустили это поле</span>
+                        <input id="url-input" type="url" name="name" class="popup__input popup__input_type_picture" placeholder="Ссылка на картинку" required>
+                        <span class="popup__url-input-error">Вы пропустили это поле</span>
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </form>
                 </div>
@@ -74,7 +78,8 @@
         </div>
     </div>    
 </template>
-
+    <script src="./src/validate.js"></script>
     <script src="./src/script.js"></script>
+
 </body>
 </html>

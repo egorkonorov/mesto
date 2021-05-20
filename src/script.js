@@ -19,8 +19,9 @@
   const popupPictureName = popupPicture.querySelector('.popup__name')
   const popupInformationForm = popupInformation.querySelector('.popup__form')
   const popupPlaceForm = popupPlace.querySelector('.popup__form')
-
-
+  const inputNameError = popupInformationForm.querySelector(`.popup__${popupInformationName.id}-error`)
+  const inputDescriptionError = popupInformationForm.querySelector(`.popup__${popupInformationDiscription.id}-error`)
+  const popup = document.querySelectorAll('.popup')
 
   //Функция создания карточки
   function createCard (name, link){
@@ -64,16 +65,18 @@
 
   //Функция открытия попапа
   function openPopup(item){
-    item.classList.toggle('popup_disabled');
+    item.classList.remove('popup_disabled');
   }
   //Функция закрытия попапа
   function closePopup(item){
-    item.classList.toggle('popup_disabled')
+    item.classList.add('popup_disabled')
   }
 
     //Открытие и закрытие попапа изменения информации
     popupInformationCloseButton.addEventListener('click', function(){
       closePopup(popupInformation)
+      hideInputError(popupInformationForm, popupInformationName)
+      hideInputError(popupInformationForm, popupInformationDiscription) 
     });
     editButton.addEventListener('click', function(){
       popupInformationName.value = `${profileName.textContent}`;
@@ -125,6 +128,9 @@
 //Закрытие попапа изображения
   popupPictureCloseButton.addEventListener('click', function(){
     closePopup(popupPicture)
+    hideInputError( popupPlaceForm, popupPlaceName)
+    hideInputError(popupPlaceForm, popupPlacePicture) 
+    popupPlaceForm.reset()
   });
   
   //Закрытие попапа добавления фотографии
@@ -147,3 +153,24 @@
     popupPlaceForm.reset()
   }
   popupPlaceForm.addEventListener('submit', submitPopupPlace );
+
+
+//Закрытие попапа по оверлэю
+popup.forEach(function(popupElement){
+  popupElement.addEventListener('click', function(evt){
+    if(evt.target === evt.currentTarget){
+     closePopup(popupElement) 
+    }
+  })
+})
+
+//Закрытие попапа по esc
+document.addEventListener('keydown', function(evt){
+  if(evt.keyCode === 27){
+   closePopup(popupPlace)
+   closePopup(popupPicture)
+   closePopup(popupInformation)
+  }
+})
+
+
