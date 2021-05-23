@@ -1,48 +1,58 @@
 // Функция, которая добавляет класс с ошибкой и span строку ошибки
-const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.popup__${inputElement.id}-error`);
-    inputElement.classList.add('popup__input_type_error');
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+    const errorElement = formElement.querySelector(`#span-${inputElement.id}`);
+    inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(`popup__${inputElement.id}-error_active`);
+    errorElement.classList.add(config.errorClass);
   };
   
   // Функция, которая удаляет класс с ошибкой и span строку ошибки
-  const hideInputError = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.popup__${inputElement.id}-error`);
-    inputElement.classList.remove('popup__input_type_error');
-    errorElement.classList.remove(`popup__${inputElement.id}-error_active`);
+  const hideInputError = (formElement, inputElement, config) => {
+    const errorElement = formElement.querySelector(`#span-${inputElement.id}`);
+    inputElement.classList.remove(config.inputErrorClass);
+    errorElement.classList.remove(config.errorClass);
     errorElement.textContent = "";
   };
   
   // Функция проверки валидности поля
-  const isValid = (formElement, inputElement) => {
+  const isValid = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
+      showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
-      hideInputError(formElement, inputElement,);
+      hideInputError(formElement, inputElement, config);
     }
   };
   // Функция добавления обработчиков всем полям формы
-  function setEventListeners (formElement){
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const buttonElement = formElement.querySelector('.popup__submit-button');
-    toggleButtonState(inputList, buttonElement);
+  function setEventListeners (formElement, config){
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    const buttonElement = formElement.querySelector(config.submitButtonSelector);
+    toggleButtonState(inputList, buttonElement, config);
     inputList.forEach(function(inputElement){
       inputElement.addEventListener('input', function(){
-        isValid(formElement, inputElement)
-        toggleButtonState(inputList, buttonElement);
+        isValid(formElement, inputElement, config)
+        toggleButtonState(inputList, buttonElement, config) ;
       })
     })
   }
   // Функция перебора всех форм и добавления их полям ввода обработчиков
-  function enableValidation(){
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
+  function enableValidation(config){
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach(function(formElement){
-      setEventListeners(formElement)
+      setEventListeners(formElement, config)
     })
   }
   
-  enableValidation()
+  enableValidation(config); 
   
   
   //Функция поиска невалидных строк ввода
@@ -52,12 +62,12 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     })
   }; 
   
-  function toggleButtonState (inputList, buttonElement){
+  function toggleButtonState (inputList, buttonElement, config){
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add('popup__submit-button_inactive');
+      buttonElement.classList.add(config.inactiveButtonClass);
       buttonElement.setAttribute('disabled', 'disabled')
     } else {
-      buttonElement.classList.remove('popup__submit-button_inactive');
+      buttonElement.classList.remove(config.inactiveButtonClass);
       buttonElement.removeAttribute('disabled', 'disabled')
     }
   }; 

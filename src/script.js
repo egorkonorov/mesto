@@ -21,7 +21,7 @@
   const popupPlaceForm = popupPlace.querySelector('.popup__form')
   const inputNameError = popupInformationForm.querySelector(`.popup__${popupInformationName.id}-error`)
   const inputDescriptionError = popupInformationForm.querySelector(`.popup__${popupInformationDiscription.id}-error`)
-  const popup = document.querySelectorAll('.popup')
+  const popups = document.querySelectorAll('.popup')
 
   //Функция создания карточки
   function createCard (name, link){
@@ -66,17 +66,28 @@
   //Функция открытия попапа
   function openPopup(item){
     item.classList.remove('popup_disabled');
+    document.addEventListener('keydown', function(evt){
+      if (evt.keyCode === 27){
+        closePopup(item)
+      }
+    })
   }
+
   //Функция закрытия попапа
   function closePopup(item){
     item.classList.add('popup_disabled')
+    document.removeEventListener('keydown', function(evt){
+      if (evt.keyCode === 27){
+        closePopup(item)
+      }
+    })
   }
 
     //Открытие и закрытие попапа изменения информации
     popupInformationCloseButton.addEventListener('click', function(){
       closePopup(popupInformation)
-      hideInputError(popupInformationForm, popupInformationName)
-      hideInputError(popupInformationForm, popupInformationDiscription) 
+      hideInputError(popupInformationForm, popupInformationName, config)
+      hideInputError(popupInformationForm, popupInformationDiscription, config) 
     });
     editButton.addEventListener('click', function(){
       popupInformationName.value = `${profileName.textContent}`;
@@ -128,8 +139,8 @@
 //Закрытие попапа изображения
   popupPictureCloseButton.addEventListener('click', function(){
     closePopup(popupPicture)
-    hideInputError( popupPlaceForm, popupPlaceName)
-    hideInputError(popupPlaceForm, popupPlacePicture) 
+    hideInputError( popupPlaceForm, popupPlaceName, config)
+    hideInputError(popupPlaceForm, popupPlacePicture, config) 
     popupPlaceForm.reset()
   });
   
@@ -156,21 +167,10 @@
 
 
 //Закрытие попапа по оверлэю
-popup.forEach(function(popupElement){
+popups.forEach(function(popupElement){
   popupElement.addEventListener('click', function(evt){
     if(evt.target === evt.currentTarget){
      closePopup(popupElement) 
     }
   })
 })
-
-//Закрытие попапа по esc
-document.addEventListener('keydown', function(evt){
-  if(evt.keyCode === 27){
-   closePopup(popupPlace)
-   closePopup(popupPicture)
-   closePopup(popupInformation)
-  }
-})
-
-
