@@ -170,11 +170,8 @@ popups.forEach(function(popupElement){
 //Закрытие попапа по esc
 function closePopupEsc(evt){
   if (evt.keyCode === 27){
-    const popupsArray = Array.from(popups)
-    popupsArray.forEach(function(popupItem){
-      if (!popupItem.classList.contains('popup__disabled')){ 
-    closePopup(popupItem)
-    }})
+    const openedPopup = document.querySelector('.popup:not(.popup_disabled)');
+    closePopup(openedPopup);
   }
 }
 
