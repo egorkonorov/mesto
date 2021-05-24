@@ -66,21 +66,13 @@
   //Функция открытия попапа
   function openPopup(item){
     item.classList.remove('popup_disabled');
-    document.addEventListener('keydown', function(evt){
-      if (evt.keyCode === 27){
-        closePopup(item)
-      }
-    })
+    document.addEventListener('keydown', closePopupEsc)
   }
 
   //Функция закрытия попапа
   function closePopup(item){
     item.classList.add('popup_disabled')
-    document.removeEventListener('keydown', function(evt){
-      if (evt.keyCode === 27){
-        closePopup(item)
-      }
-    })
+    document.removeEventListener('keydown', closePopupEsc)
   }
 
     //Открытие и закрытие попапа изменения информации
@@ -174,3 +166,15 @@ popups.forEach(function(popupElement){
     }
   })
 })
+
+//Закрытие попапа по esc
+function closePopupEsc(evt){
+  if (evt.keyCode === 27){
+    const popupsArray = Array.from(popups)
+    popupsArray.forEach(function(popupItem){
+      if (!popupItem.classList.contains('popup__disabled')){ 
+    closePopup(popupItem)
+    }})
+  }
+}
+
