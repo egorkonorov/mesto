@@ -1,7 +1,10 @@
+  import {Card} from './card.js'
+  import {FormValidator} from './validate.js'
+  
   
   const elementTemplate = document.querySelector('#element-template').content
   const elements = document.querySelector('.elements')
-  const popupPicture = document.querySelector('.popup_picture')
+  export const popupPicture = document.querySelector('.popup_picture')
   const popupPlace = document.querySelector('#place')
   const popupPlaceName = popupPlace.querySelector('.popup__input_type_name')
   const popupPlacePicture = popupPlace.querySelector('.popup__input_type_picture')
@@ -15,62 +18,47 @@
   const popupPictureCloseButton = popupPicture.querySelector('.popup__close-button')
   const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-button')
   const addButton = document.querySelector('.profile__add-button')
-  const popupPictureImage = popupPicture.querySelector('.popup__image')
-  const popupPictureName = popupPicture.querySelector('.popup__name')
+  export const popupPictureImage = popupPicture.querySelector('.popup__image')
+  export const popupPictureName = popupPicture.querySelector('.popup__name')
   const popupInformationForm = popupInformation.querySelector('.popup__form')
   const popupPlaceForm = popupPlace.querySelector('.popup__form')
   const inputNameError = popupInformationForm.querySelector(`.popup__${popupInformationName.id}-error`)
   const inputDescriptionError = popupInformationForm.querySelector(`.popup__${popupInformationDiscription.id}-error`)
   const popups = document.querySelectorAll('.popup')
 
-  //Функция создания карточки
-  function createCard (name, link){
-    //Назначение параметров карточки (ссылки и имени)
-    const newCard = elementTemplate.querySelector('.elements__element').cloneNode(true)
-    const newPicture = newCard.querySelector('.elements__picture')
-    const newName = newCard.querySelector('.elements__name')
-    newPicture.src = link
-    newPicture.alt = name
-    newName.textContent = name
-    // Проставление лайка у новой карточки
-    const newLikeButton = newCard.querySelector('.elements__like')
-    newLikeButton.addEventListener('click', function(evt){
-    evt.target.classList.toggle('elements__like_active');
-    })
-    //Удаление карточки
-    const newTrashButton = newCard.querySelector('.elements__trash')
-    newTrashButton.addEventListener('click', function(){
-    const listItem = newTrashButton.closest('.elements__element')
-    listItem.remove()
-    })
-    //Открытие попапа просмотра фотографии у новой карточки
-    newPicture.addEventListener('click',function(){
-      popupPictureImage.src = newPicture.src
-      popupPictureName.textContent = newName.textContent
-      popupPictureImage.alt = name
-      openPopup(popupPicture)
-    })
-    return newCard
-  }
-
   // Функция добавления карточки в конец
-  function addCardEnd(name, link){
-    elements.append(createCard(name, link))
-  }
+  // function addCardEnd(name, link){
+  //   const card = new Card('#element-template', name, link);
+  //   const cardElement = card.generateCard();
+  //   elements.append(cardElement)
+  // }
 
   // Функция добавления карточки в начало
   function addCardBegin(name, link){
-    elements.prepend(createCard(name, link))
+    const card = new Card('#element-template', name, link);
+    const cardElement = card.generateCard();
+    elements.prepend(cardElement)
   }
 
   //Функция открытия попапа
-  function openPopup(item){
+  export function openPopup(item){
     item.classList.remove('popup_disabled');
     document.addEventListener('keydown', closePopupEsc)
   }
 
   //Функция закрытия попапа
   function closePopup(item){
+    //Очистка ошибки у формы
+    const formItem = item.querySelector('.popup__form')
+    if (!(formItem === null)){
+    const InputList = Array.from(formItem.querySelectorAll('.popup__input'))
+    InputList.forEach((input) => {
+    input.classList.remove('popup__input_type_error')
+    const errorElement = formItem.querySelector(`#span-${input.id}`);
+    errorElement.classList.remove('popup__input-error_active')
+    errorElement.textContent = ''
+  })}
+  //Закрытиe попапа, удаление слушателя кнопки ESC
     item.classList.add('popup_disabled')
     document.removeEventListener('keydown', closePopupEsc)
   }
@@ -78,8 +66,6 @@
     //Открытие и закрытие попапа изменения информации
     popupInformationCloseButton.addEventListener('click', function(){
       closePopup(popupInformation)
-      hideInputError(popupInformationForm, popupInformationName, config)
-      hideInputError(popupInformationForm, popupInformationDiscription, config) 
     });
     editButton.addEventListener('click', function(){
       popupInformationName.value = `${profileName.textContent}`;
@@ -124,21 +110,21 @@
     }
   ];
   //Добавление начальных 6-ти карточек на страницу
-  initialCards.forEach(function(item){
-    addCardEnd(item.name, item.link)
+  initialCards.forEach((item) => {
+    const card = new Card('#element-template', item.name, item.link);
+    const cardElement = card.generateCard();
+    elements.append(cardElement )
   })
 
 //Закрытие попапа изображения
   popupPictureCloseButton.addEventListener('click', function(){
     closePopup(popupPicture)
-    hideInputError( popupPlaceForm, popupPlaceName, config)
-    hideInputError(popupPlaceForm, popupPlacePicture, config) 
-    popupPlaceForm.reset()
   });
   
   //Закрытие попапа добавления фотографии
   popupPlaceCloseButton.addEventListener('click',function(){
     closePopup(popupPlace)
+    popupPlaceForm.reset()
   })
 
 
@@ -175,3 +161,9 @@ function closePopupEsc(evt){
   }
 }
 
+//Вызов валидации форм через класс FormValidator
+const formValidatorInformation = new FormValidator('#form-edit-information', '.popup__input', '.popup__submit-button', 'popup__submit-button_inactive', 'popup__input_type_error', 'popup__input-error_active' )
+formValidatorInformation.enableValidation()
+
+const formValidatorpPlace = new FormValidator('#form-edit-place', '.popup__input', '.popup__submit-button', 'popup__submit-button_inactive', 'popup__input_type_error', 'popup__input-error_active' )
+formValidatorpPlace.enableValidation()
