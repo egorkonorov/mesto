@@ -5,12 +5,11 @@ export default class UserInfo{
         this._userInformation = document.querySelector(userInformationSelector);
     }
     getUserInfo(){
-        const userInfo = [
-            { name: this._userName.value,
-              information: this._userInformation.value
-            }
-        ];
-        return userInfo;
+        this._userInfo = 
+            { name: this._userName.textContent,
+              information: this._userInformation.textContent
+            };
+        return this._userInfo;
     }
     setUserInfo(newUserName, newUserInformation){
         console.log(this._userName)

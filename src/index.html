@@ -13,9 +13,9 @@
                     <form id="form-edit-information" class="popup__form" name="edit-information" novalidate>
                         <button class="popup__close-button" type="button"></button>
                         <h2 class="popup__heading">Редактировать профиль</h2>
-                        <input id="name-input" type="text" minlength="2" maxlength="40" name="user-name" class="popup__input popup__input_type_name" placeholder="Имя пользователя" required>
+                        <input id="name-input" type="text" minlength="2" maxlength="40" name="naming" class="popup__input popup__input_type_name" placeholder="Имя пользователя" required>
                         <span id="span-name-input" class="popup__input-error">Вы пропустили это поле</span>
-                        <input id="description-input" type="text" minlength="2" maxlength="200" name="user-description" class="popup__input  popup__input_type_description" placeholder="Описание" required>
+                        <input id="description-input" type="text" minlength="2" maxlength="200" name="description" class="popup__input  popup__input_type_description" placeholder="Описание" required>
                         <span id="span-description-input" class="popup__input-error">Вы пропустили это поле</span>
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </form>
@@ -42,12 +42,12 @@
                 </div>
             </div>      
         <header class="header">
-            <img class="header__logo" src="<%=require('./../images/Vector.svg')%>" alt="Логотип">
+            <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип">
         </header>
         <main>
         <section class="profile">
             <div class="profile__main-information">
-                <img class ="profile__avatar" src="<%=require('./../images/avatar.jpg')%>" alt="Аватар пользователя">
+                <img class ="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
                 <div class="profile__profile-info">
                     <div class="profile__header">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>

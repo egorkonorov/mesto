@@ -47,3 +47,11 @@ export const addButton = document.querySelector(".profile__add-button");
 export const popupPictureImage = popupPicture.querySelector(".popup__image");
 export const popupPictureName = popupPicture.querySelector(".popup__name");
 export const popupInformationForm = popupInformation.querySelector(".popup__form");
+
+export const config = { 
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__submit-button', 
+  inactiveButtonClass: 'popup__submit-button_inactive', 
+  inputErrorClass: 'popup__input_type_error', 
+  errorClass: 'popup__input-error_active' 
+} 
