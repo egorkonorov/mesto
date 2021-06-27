@@ -8,13 +8,18 @@ import PopupWithForm from './../components/PopupWithForm.js'
 import UserInfo from './../components/UserInfo.js'
 import PopupWithImage from './../components/PopupWithImage.js'
 
+
 //Функция создания карточки
-function createNewCard(cardSelector, name, link, {handleCardClick}){
-  const card = new Card(cardSelector, name, link, {handleCardClick})
+function createNewCard(name, link){
+  const card = new Card("#element-template", name, link, {
+    handleCardClick: () => 
+    {
+      popupImage.open(name, link)
+    }
+  })
   const cardElement = card.generateCard();
   return cardElement
 }
-
 
 
 //Вызов валидации форм через класс FormValidator
@@ -39,12 +44,7 @@ popupImage.setEventListeners()
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const newCard = createNewCard("#element-template", item.name, item.link, {
-      handleCardClick: () => 
-      {
-        popupImage.open(item.name, item.link)
-      }
-    })
+    const newCard = createNewCard(item.name, item.link)
     cardList.addItem(newCard);
   }
 },
@@ -78,12 +78,7 @@ editButton.addEventListener("click", () => {
 const popupAddPlace = new PopupWithForm('#place', {
   formSubmit: (inputValues) =>
   {
-        const newCard = createNewCard("#element-template", inputValues.picture, inputValues.name, {
-          handleCardClick: (name, link) => 
-          {
-            popupImage.open(name, link )
-          }
-        })
+        const newCard = createNewCard(inputValues.picture, inputValues.name)
         popupAddPlace.close()
         cardList.addItem(newCard);
   }
