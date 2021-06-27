@@ -26,7 +26,7 @@ export const initialCards = [
   ];
 
 
-export const CardListSelector = ".elements"
+export const cardListSelector = ".elements"
 
 export const popupPicture = document.querySelector(".popup_picture");
 export const popupPlace = document.querySelector("#place");

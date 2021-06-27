@@ -3,16 +3,16 @@ import './index.css';
 import Card from "./../components/Сard.js";
 import { FormValidator } from "./../components/FormValidator.js";
 import Section from './../components/Section.js'
-import {initialCards, CardListSelector, editButton, addButton, config} from './../utils/constants.js'
+import {initialCards, cardListSelector, editButton, addButton, config, popupInformationName, popupInformationDiscription} from './../utils/constants.js'
 import PopupWithForm from './../components/PopupWithForm.js'
 import UserInfo from './../components/UserInfo.js'
 import PopupWithImage from './../components/PopupWithImage.js'
 
 //Функция создания карточки
-function newCard(cardSelector, name, link, {handleCardClick}){
+function createNewCard(cardSelector, name, link, {handleCardClick}){
   const card = new Card(cardSelector, name, link, {handleCardClick})
   const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  return cardElement
 }
 
 
@@ -39,15 +39,16 @@ popupImage.setEventListeners()
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    newCard("#element-template", item.name, item.link, {
+    const newCard = createNewCard("#element-template", item.name, item.link, {
       handleCardClick: () => 
       {
         popupImage.open(item.name, item.link)
       }
     })
+    cardList.addItem(newCard);
   }
 },
-CardListSelector
+cardListSelector
 )
 cardList.renderItems(); 
 
@@ -56,56 +57,43 @@ const userInfo = new UserInfo('.profile__name', '.profile__description')
 
 //Попап с формой изменения информации о пользователе
 const popupInfo = new PopupWithForm('#information', {
-  formSubmit: (InputValues) => 
+  formSubmit: (inputValues) => 
       { 
-      userInfo.setUserInfo(InputValues.naming, InputValues.description)
+      userInfo.setUserInfo(inputValues.naming, inputValues.description)
       popupInfo.close()
       }
-    },
-  {
-  pasteInputValues: (inputName, inputDescription) => {
-    const userInformation = userInfo.getUserInfo()
-      console.log(userInformation)
-      inputName.value = userInformation.name
-      inputDescription.value = userInformation.information
     }
-  }
   )
   
 popupInfo.setEventListeners()
 
 editButton.addEventListener("click", () => {
   popupInfo.open()
-  popupInfo.setInputValues()
+  popupInformationName.value = userInfo.getUserInfo().name;
+  popupInformationDiscription.value = userInfo.getUserInfo().information;
 })
 
 
 //Попап с формой добавления карточки
 const popupAddPlace = new PopupWithForm('#place', {
-  formSubmit: (InputValues) =>
+  formSubmit: (inputValues) =>
   {
-        newCard("#element-template", InputValues.picture, InputValues.name, {
+        const newCard = createNewCard("#element-template", inputValues.picture, inputValues.name, {
           handleCardClick: (name, link) => 
           {
             popupImage.open(name, link )
           }
         })
         popupAddPlace.close()
+        cardList.addItem(newCard);
   }
 },
-{
-  pasteInputValues: (inputName, inputDescription) => {
-    const userInformation = userInfo.getUserInfo()
-      inputName.value = userInformation.name
-      inputDescription = userInformation.information
-    }
-  }
 )
 popupAddPlace.setEventListeners()
 
 addButton.addEventListener("click", function () {
   popupAddPlace.open()
-  formValidatorPlace._toggleButtonState();
+  formValidatorPlace.toggleButtonState();
 });
 
 
