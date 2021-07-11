@@ -1,0 +1,7 @@
+.elements__like-base{
+    display: flex;
+    flex-direction: column;
+    max-height: 35px;
+    align-self: center;
+    justify-self: center;
+}

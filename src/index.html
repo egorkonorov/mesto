@@ -40,6 +40,13 @@
                     <img class="popup__image" src="#" alt="Открытая картинка">
                     <p class="popup__name">#</p>
                 </div>
+            </div> 
+            <div class="popup popup_delete popup_disabled" id="delete">
+                <div class="popup__base-delete">
+                    <button class="popup__close-button" type="button"></button>
+                    <h2 class="popup__heading-delete">Вы уверены?</h2>
+                    <button type="submit" class="popup__submit-button-delete">Да</button>
+                </div>
             </div>      
         <header class="header">
             <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип">
@@ -73,7 +80,10 @@
         <button class="elements__trash" type="button"></button>
         <div class="elements__board">
             <h2 class="elements__name">#</h2>
-            <button class="elements__like" type="button"></button>
+            <div class ="elements__like-base">
+                <button class="elements__like" type="button"></button>
+                <p class ="elements__likes-counter">0</p>
+            </div>
         </div>
     </div>    
 </template>

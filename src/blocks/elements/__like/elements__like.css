@@ -3,6 +3,7 @@
     height: 19px;
     background-image: url(./../../../images/like-button-svg.svg);
     align-self: center;
+    justify-self: center;
     cursor: pointer;
     border: none;
     background-color: white;
