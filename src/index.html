@@ -34,27 +34,46 @@
                     </form>
                 </div>
             </div> 
+
             <div class="popup popup_picture popup_disabled" id="picture">
                 <div class="popup__basis">
                     <button class="popup__close-button" type="button"></button>
                     <img class="popup__image" src="#" alt="Открытая картинка">
                     <p class="popup__name">#</p>
                 </div>
-            </div> 
+            </div>
+
             <div class="popup popup_delete popup_disabled" id="delete">
                 <div class="popup__base-delete">
                     <button class="popup__close-button" type="button"></button>
                     <h2 class="popup__heading-delete">Вы уверены?</h2>
                     <button type="submit" class="popup__submit-button-delete">Да</button>
                 </div>
-            </div>      
+            </div>
+
+            <div class="popup popup_disabled" id="avatar">
+                <div class="popup__base">
+                    <form id="form-edit-avatar" class="popup__form" name="edit-avatar" novalidate>
+                        <button class="popup__close-button" type="button"></button>
+                        <h2 class="popup__heading">Обновить аватар</h2>
+                        <input id="url-avatar-input" type="url" name="avatar" class="popup__input popup__input_type_picture" placeholder="Ссылка на новый аватар" required>
+                        <span id="span-url-avatar-input" class="popup__input-error">Вы пропустили это поле</span>
+                        <button type="submit" class="popup__submit-button">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+            
+            
         <header class="header">
             <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип">
         </header>
         <main>
         <section class="profile">
             <div class="profile__main-information">
-                <img class ="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
+                <div class="profile__overlay">
+                    <img class ="profile__pen-pic" src ="<%=require('./images/pen_image.png')%>" alt="Карандаш изменения">
+                    <img class ="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
+                </div>
                 <div class="profile__profile-info">
                     <div class="profile__header">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>

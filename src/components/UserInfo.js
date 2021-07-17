@@ -13,12 +13,13 @@ export default class UserInfo{
         return this._userInfo;
     }
     setUserInfo(newUserName, newUserInformation){
-        console.log(this._userName)
         this._userName.textContent = `${newUserName}`;
         this._userInformation.textContent = `${newUserInformation}`;
     }
+    setUserAvatar(newUserAvatar){
+        this._userAvatar.src = `${newUserAvatar}`    
+    }
     setUserInfoAll(newUserName, newUserInformation, newUserAvatar){
-        console.log(this._userName)
         this._userName.textContent = `${newUserName}`;
         this._userInformation.textContent = `${newUserInformation}`;
         this._userAvatar.src = `${newUserAvatar}`

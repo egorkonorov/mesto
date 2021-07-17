@@ -47,7 +47,7 @@ export const addButton = document.querySelector(".profile__add-button");
 export const popupPictureImage = popupPicture.querySelector(".popup__image");
 export const popupPictureName = popupPicture.querySelector(".popup__name");
 export const popupInformationForm = popupInformation.querySelector(".popup__form");
-
+export const overlay = document.querySelector(".profile__overlay");
 export const config = { 
   inputSelector: '.popup__input', 
   submitButtonSelector: '.popup__submit-button', 
