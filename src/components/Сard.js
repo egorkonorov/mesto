@@ -1,15 +1,15 @@
 
 //Класс Card
 export default class Card {
-  constructor(cardSelector, name, link, likesLength, owner, user, cardId, likes, {handleCardClick}, {openPopupDelete}, {setLikeCard}, {deleteLikeCard}) {
+  constructor(cardSelector, name, link, likesLength, ownerId, userId, cardId, likes, {handleCardClick}, {openPopupDelete}, {setLikeCard}, {deleteLikeCard}) {
     this._cardSelector = cardSelector;
     this._name = name;
     this._picture = link;
     this._handleCardClick = handleCardClick
     this._likesLength = likesLength
     this._openPopupDelete = openPopupDelete
-    this._owner = owner
-    this._user = user
+    this._owner = ownerId
+    this._user = userId
     this._cardId = cardId
     this._setLikeCard = setLikeCard
     this._deleteLikeCard = deleteLikeCard
@@ -59,16 +59,12 @@ export default class Card {
       });
   }
   _handleLikeButtonClick() {
-    const likesCounter = this._element.querySelector(".elements__likes-counter")
     if(this._element.querySelector(".elements__like").classList.contains('elements__like_active')){
-      this._deleteLikeCard(this._cardId, likesCounter)
+      this._deleteLikeCard(this._cardId)
     }
     else{
-      this._setLikeCard(this._cardId, likesCounter)
+      this._setLikeCard(this._cardId)
     }
-    this._element
-      .querySelector(".elements__like")
-      .classList.toggle("elements__like_active");    
   }
 
   _handleTrashButtonClick() {
@@ -81,7 +77,7 @@ export default class Card {
   _isLiked(){
       const likesList = []
       this._likes.forEach(element => {
-      likesList.push(element.name)
+      likesList.push(element._id)
   })
   if (likesList.includes(this._user)){
     return true
@@ -89,5 +85,11 @@ export default class Card {
   else {
     return false
        }
+}
+setLikeCard(length){
+  const likesCounter = this._element.querySelector(".elements__likes-counter")
+  const likeButton = this._element.querySelector(".elements__like")
+  likeButton.classList.toggle("elements__like_active")    
+  likesCounter.textContent = length
 }
 }

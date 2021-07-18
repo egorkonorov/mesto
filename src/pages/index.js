@@ -21,17 +21,15 @@ function createNewCard(name, link, likesLength, owner, user, cardId, likes){
   {
     openPopupDelete: (card, cardId) =>
     {
-      popupDelete.open()
-      popupDelete.setEventListeners(card, cardId)
+      popupDelete.open(card, cardId)
     }
   }, 
   {
-    setLikeCard: (cardId, likesCounter) => 
+    setLikeCard: (cardId) => 
     {
       api.setLikeCard(cardId)
         .then(data =>{
-          console.log (data.likes)
-          likesCounter.textContent = data.likes.length
+          card.setLikeCard(data.likes.length)
         })
         .catch((err) => {
           console.log(err);
@@ -40,12 +38,11 @@ function createNewCard(name, link, likesLength, owner, user, cardId, likes){
     }
   },
   {
-    deleteLikeCard:(cardId, likesCounter) =>
+    deleteLikeCard:(cardId) =>
     {
       api.deleteLikeCard(cardId)
         .then(data =>{
-          console.log (data.likes)
-          likesCounter.textContent = data.likes.length
+          card.setLikeCard(data.likes.length)
         })
         .catch((err) => {
           console.log(err);
@@ -74,6 +71,7 @@ const popupDelete= new PopupDelete ('#delete', {
 
       }
     }) 
+    popupDelete.setEventListeners()
 //Попап с изменением аватара
 const popupAvatar = new PopupWithForm ('#avatar', {
   formSubmit: (inputValues) => 
@@ -83,10 +81,12 @@ const popupAvatar = new PopupWithForm ('#avatar', {
       .then(data => {
         userInfo.setUserAvatar(data.avatar)
         popupAvatar.close()
-        popupAvatar.renderLoading(false)
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() =>{
+        popupAvatar.renderLoading(false)
       })
       }
     }
@@ -128,11 +128,13 @@ const popupInfo = new PopupWithForm('#information', {
       api.patchUserInfo(inputValues)
       .then(data => {
       userInfo.setUserInfo(data.name, data.about)
-      popupInfo.renderLoading(false) 
       popupInfo.close()
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() =>{
+        popupInfo.renderLoading(false)
       })
       }
     }
@@ -157,7 +159,7 @@ const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
   headers: {
     authorization: 'a9c109c0-41f8-4711-973c-118851a874e2',
-    'Content-Type': 'application/json'
+    contentType:'application/json'
   }
 })
 //Вызов функции получени информации класса Api занесение информации через через функцию setUserInfo класса UserInfo
@@ -171,14 +173,17 @@ const api = new Api({
 
   
 //Вызов функции получения карточек класса Api занесение карточек через через renderItems класса Section
-api.getInitialCards()
-  .then((data) =>{
+Promise.all([     //в Promise.all передаем массив промисов которые нужно выполнить
+  api.getUserInfo(),
+  api.getInitialCards()
+])
+  .then((values)=>{ 
     const cardList = new Section({
-      items: data,
+      items: values[1],
       renderer: (item) => {
-        const userName = userInfo.getUserInfo().name
-        const newCard = createNewCard(item.name, item.link, item.likes.length, item.owner, userName, item._id, item.likes)
-        cardList.addItem(newCard);
+            const userId = values[0]._id
+            const newCard = createNewCard(item.name, item.link, item.likes.length, item.owner._id, userId, item._id, item.likes)
+            cardList.addItem(newCard);
       }
     },
     cardListSelector
@@ -193,9 +198,14 @@ api.getInitialCards()
           api.postNewCard(inputValues.picture, inputValues.name )
             .then(data => {
               const newCard = createNewCard(inputValues.picture, inputValues.name, 0, data.owner.name, userName, data._id, data.likes)
-              popupAddPlace.renderLoading(false) 
             popupAddPlace.close()
             cardList.addItem(newCard);
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() =>{
+              popupAddPlace.renderLoading(false)
             })
       }
     },
@@ -208,9 +218,9 @@ api.getInitialCards()
       formValidatorPlace.toggleButtonState();
     });
   })
-  .catch((err) => {
+  .catch((err)=>{     //попадаем сюда если один из промисов завершится ошибкой
     console.log(err);
-  }); 
+  }) 
   
   overlay.addEventListener("click", function () {
     popupAvatar.open()
