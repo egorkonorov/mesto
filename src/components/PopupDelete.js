@@ -6,8 +6,7 @@ export default class PopupDelete extends Popup{
         this._deleteCard = deleteCard
     }
 
-
-    setEventListeners(){
+    setEventListeners(card, cardId){
     super.setEventListeners()
     const confirmButton = this._popupElement.querySelector('.popup__submit-button-delete');
     console.log(confirmButton)

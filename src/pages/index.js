@@ -21,6 +21,7 @@ function createNewCard(name, link, likesLength, owner, user, cardId, likes){
   {
     openPopupDelete: (card, cardId) =>
     {
+      popupDelete.setEventListeners(card, cardId)
       popupDelete.open(card, cardId)
     }
   }, 
@@ -71,7 +72,6 @@ const popupDelete= new PopupDelete ('#delete', {
 
       }
     }) 
-    popupDelete.setEventListeners()
 //Попап с изменением аватара
 const popupAvatar = new PopupWithForm ('#avatar', {
   formSubmit: (inputValues) => 
@@ -162,28 +162,21 @@ const api = new Api({
     contentType:'application/json'
   }
 })
-//Вызов функции получени информации класса Api занесение информации через через функцию setUserInfo класса UserInfo
- api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfoAll(data.name, data.about, data.avatar)
-  })
-  .catch((err) => {
-    console.log(err);
-  }); 
 
-  
+
 //Вызов функции получения карточек класса Api занесение карточек через через renderItems класса Section
 Promise.all([     //в Promise.all передаем массив промисов которые нужно выполнить
   api.getUserInfo(),
   api.getInitialCards()
 ])
   .then((values)=>{ 
+    userInfo.setUserInfoAll(values[0].name, values[0].about, values[0].avatar)
     const cardList = new Section({
       items: values[1],
       renderer: (item) => {
             const userId = values[0]._id
             const newCard = createNewCard(item.name, item.link, item.likes.length, item.owner._id, userId, item._id, item.likes)
-            cardList.addItem(newCard);
+            cardList.addItemEnd(newCard);
       }
     },
     cardListSelector
@@ -199,7 +192,7 @@ Promise.all([     //в Promise.all передаем массив промисо�
             .then(data => {
               const newCard = createNewCard(inputValues.picture, inputValues.name, 0, data.owner.name, userName, data._id, data.likes)
             popupAddPlace.close()
-            cardList.addItem(newCard);
+            cardList.addItemBegin(newCard);
             })
             .catch((err) => {
               console.log(err);
