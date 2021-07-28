@@ -1,7 +1,7 @@
 
 //Класс Card
 export default class Card {
-  constructor(cardSelector, name, link, likesLength, ownerId, userId, cardId, likes, {handleCardClick}, {openPopupDelete}, {setLikeCard}, {deleteLikeCard}) {
+  constructor(cardSelector, name, link, likesLength, ownerId, userId, cardId, likes, {handleCardClick, openPopupDelete, setLikeCard, deleteLikeCard}) {
     this._cardSelector = cardSelector;
     this._name = name;
     this._picture = link;
@@ -75,16 +75,7 @@ export default class Card {
   }
 
   _isLiked(){
-      const likesList = []
-      this._likes.forEach(element => {
-      likesList.push(element._id)
-  })
-  if (likesList.includes(this._user)){
-    return true
-  }
-  else {
-    return false
-       }
+    return this._likes.some((like) => like._id === this._user); 
 }
 setLikeCard(length){
   const likesCounter = this._element.querySelector(".elements__likes-counter")

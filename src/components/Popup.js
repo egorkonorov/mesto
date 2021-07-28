@@ -14,7 +14,7 @@ export default class Popup{
     }
     _handleEscClose(evt){
         if (evt.keyCode === 27) {
-            const openedPopup = document.querySelector(".popup:not(.popup_disabled)");
+            const openedPopup = this._popupElement.querySelector(".popup:not(.popup_disabled)");
             this.close(openedPopup);
           }
     }

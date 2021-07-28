@@ -17,15 +17,14 @@ function createNewCard(name, link, likesLength, owner, user, cardId, likes){
     {
       popupImage.open(name, link)
     }
-  },
-  {
+  ,
+  
     openPopupDelete: (card, cardId) =>
     {
-      popupDelete.setEventListeners(card, cardId)
       popupDelete.open(card, cardId)
     }
-  }, 
-  {
+  , 
+  
     setLikeCard: (cardId) => 
     {
       api.setLikeCard(cardId)
@@ -37,8 +36,7 @@ function createNewCard(name, link, likesLength, owner, user, cardId, likes){
         }); 
 
     }
-  },
-  {
+  ,
     deleteLikeCard:(cardId) =>
     {
       api.deleteLikeCard(cardId)
@@ -72,6 +70,7 @@ const popupDelete= new PopupDelete ('#delete', {
 
       }
     }) 
+    popupDelete.setEventListeners()
 //Попап с изменением аватара
 const popupAvatar = new PopupWithForm ('#avatar', {
   formSubmit: (inputValues) => 
